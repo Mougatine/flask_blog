@@ -1,0 +1,154 @@
+/* Various tweaks on core elements */
+html {
+    background-color: whitesmoke;
+}
+
+h1, h2, h3, h4, h5, h6 {
+    font-family: "PT Serif", Georgia, serif;
+    text-rendering: optimizeLegibility;
+}
+
+/* The side navigation menu */
+.sidenav {
+    height: 100%; /* 100% Full-height */
+    width: 0px; /* 0 width - change this with JavaScript */
+    position: fixed; /* Stay in place */
+    z-index: 1; /* Stay on top */
+    top: 0;
+    left: 0;
+    background-color: whitesmoke; /* Black*/
+    overflow-x: hidden; /* Disable horizontal scroll */
+    padding-top: 60px; /* Place content 60px from the top */
+    transition: 0.5s; /* 0.5 second transition effect to slide in the sidenav */
+    border-right: 1px solid darkgray;
+}
+
+/* The navigation menu links */
+
+.sidenav a {
+    padding: 8px 8px 8px 32px;
+    text-decoration: none;
+    font-size: 25px;
+    color: black;
+    display: block;
+    transition: 0.3s
+}
+
+/* When you mouse over the navigation links, change their color */
+.sidenav a:hover, .offcanvas a:focus{
+    color: darkred;
+}
+
+/* Position and style the close button (top right corner) */
+.sidenav .closebtn {
+    position: absolute;
+    top: 0;
+    right: 25px;
+    font-size: 36px;
+    margin-left: 50px;
+}
+
+/* Open button */
+#menuButton {
+    display: block;
+	position: fixed;
+	z-index: 999;
+	left: 40px;
+	top: 60px;
+    color: black;
+}
+
+#menuButton:hover,
+#menuButton:focus,
+#menuButton:active {
+    color: darkred;
+}
+
+/* Style page content - use this if you want to push the page content to the right when you open the side navigation */
+#main {
+    margin-top: 50px;
+    margin-bottom: 50px;
+}
+
+/* On smaller screens, where height is less than 450px, change the style of the sidenav (less padding and a smaller font size) */
+@media screen and (max-height: 450px) {
+    .sidenav {padding-top: 15px;}
+    .sidenav a {font-size: 18px;}
+}
+
+/* Admin header */
+#adminPannel {
+    width: 100%;
+    height: 50px;
+    color: white;
+    background-color: darkgray;
+    position: fixed;
+    top: 0;
+    left: 0;
+}
+
+#adminPannel ul {
+    float: right;
+}
+
+#adminPannel ul li {
+    display: inline;
+}
+
+/* article styling */
+.articleMain {
+    border-bottom: 1px solid lightgray;
+    padding: 8px 8px 30px 8px;
+}
+
+.articleTitle {
+    padding: 8px 8px 8px 32px;
+}
+
+.articleTitle a {
+    transition: 0.3s;
+}
+
+.articleTitle a span {
+    font-size: 25px;
+    color: darkred;
+}
+
+.articleTitle a small {
+    font-size: 15px;
+    color: darkgray;
+    float: right;
+}
+
+.articleTitle a:hover small,
+.articleTitle a:focus small,
+.articleTitle a:active small {
+    color: darkred;
+}
+
+.articleTitle a:hover,
+.articleTitle a:focus,
+.articleTitle a:active {
+    color: darkred;
+    text-decoration: underline;
+    text-decoration-color: darkred;
+}
+
+.articleContent {
+
+}
+
+.olderArrow {
+    color: black;
+    transition: 0.3s;
+}
+
+.olderArrow i {
+    margin-top: 32px;
+}
+
+.olderArrow:active,
+.olderArrow:focus,
+.olderArrow:hover {
+    color: darkred;
+}

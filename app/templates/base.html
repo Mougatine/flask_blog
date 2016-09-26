@@ -1,0 +1,46 @@
+<html>
+  <head>
+    {% if title %}
+    <title>{{ title }} - Arthur Douillard</title>
+    {% else %}
+    <title>Arthur Douillard</title>
+    {% endif %}
+
+      <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/bootstrap.min.css') }}"/>
+      <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/font-awesome.min.css') }}"/>
+      <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/style.css') }}"/>
+
+  </head>
+  <body>
+
+    {% if current_user.is_authenticated %}
+        <header id="adminPannel">
+            <ul>
+                <li>{{ current_user.username}}</li>
+                <li><a href="{{ url_for('tools') }}">Tools</a> </li>
+                <li><a href="{{ url_for('logout') }}">Logout</a></li>
+            </ul>
+        </header>
+    {% endif %}
+
+    <div id="mySidenav" class="sidenav">
+        <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+        <a href="#">About</a>
+        <a href="#">Services</a>
+        <a href="#">Clients</a>
+        <a href="#">Contact</a>
+    </div>
+
+    <a href="javascript:void(0)" onclick="openNav()" class="col-md-1" id="menuButton">
+        <i class="fa fa-bars fa-3x" aria-hidden="true"></i>
+    </a>
+
+    <div id="main" class="col-md-offset-3 col-md-7">
+        {% block content %}{% endblock %}
+    </div>
+
+  </body>
+
+<script type="text/javascript" src="{{ url_for('static', filename='js/design.js') }}"></script>
+
+</html>

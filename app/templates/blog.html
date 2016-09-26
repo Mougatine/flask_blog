@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+{% block content %}
+    {% for post in posts %}
+        <article class="articleMain">
+            <h4 class="articleTitle">
+                <a href="www.google.com">
+                    <span>{{ post.title }}</span>
+                    <small>
+                        {{ post.date.day }}/{{ post.date.month }}/{{ post.date.year }}
+                    </small>
+                </a>
+            </h4>
+            <div class="articleContent">
+                {{ post.intro }}
+            </div>
+        </article>
+    {% endfor %}
+    {% if next_page %}
+        <a class="olderArrow col-md-offset-5" href="{{ url_for('blog_next_pages', page_number=next_page) }}">
+            <i class="fa fa-caret-left fa-4x" aria-hidden="true"></i>
+        </a>
+    {% endif %}
+{% endblock %}
