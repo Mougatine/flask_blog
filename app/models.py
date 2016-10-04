@@ -33,11 +33,14 @@ class User(db.Model):
 
     @classmethod
     def get_user(cls, username, password):
-        user = cls.query.filter_by(username=username,
+        return cls.query.filter_by(username=username,
                                    password=encrypt_password(password)).first()
-        if not user:
-            return None
-        return user
+
+    def is_password(self, password):
+        return encrypt_password(password) == self.password
+
+    def set_password(self, password):
+        self.password = encrypt_password(password)
 
     def is_authenticated(self):
         return self.authenticated
@@ -65,3 +68,7 @@ class Post(db.Model):
 
     def __repr__(self):
         return '<Post %r>' % self.title
+
+    @classmethod
+    def get_post(cls, title):
+        return cls.query.filter_by(title=title).first_or_404()

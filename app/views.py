@@ -1,9 +1,10 @@
 from sqlalchemy import desc
 from flask import render_template, flash, redirect
 from flask_login import login_user, logout_user, login_required, current_user
+from mistune import Markdown, Renderer
 
 from app import app, login_manager, db
-from .forms import LoginForm, SignupForm
+from .forms import LoginForm, SignupForm, WriterForm, ChangePasswordForm
 from .models import User, Post
 
 @login_manager.user_loader
@@ -18,7 +19,7 @@ def index():  # TODO: Should be different from rest of the blg
     return redirect('/blog')
 
 
-@app.before_first_request
+#@app.before_first_request
 def fill_posts():
     db.drop_all()
     db.create_all()
@@ -41,7 +42,7 @@ def blog():
                            next_page=2)
 
 
-@app.route('/blog/page-<int:page_number>')
+@app.route('/blog/page/<int:page_number>')
 def blog_next_pages(page_number):
     """Older pages of the blog"""
     post_number = 10
@@ -60,13 +61,60 @@ def blog_next_pages(page_number):
                            posts=posts,
                            next_page=next_page)
 
+@app.route('/blog/<string:title>')
+def article(title):
+    post = Post.get_post(title)
 
-@app.route('/tools')
+    markdown = Markdown()
+    return render_template('article.html',
+                           post=post,
+                           markdown=markdown)
+# ----------------------------------------------------------------------------
+# Admin
+# ----------------------------------------------------------------------------
+
+
+@app.route('/change_password')
 @login_required
-def tools():
-    """Admin panel for various tools"""
-    return render_template('tools.html',
-                            title='Admin tools')
+def change_password():
+    """Admin panel for changing password"""
+    form = ChangePasswordForm()
+    if form.validate_on_submit():
+        user = User.query.filter_by(username=current_user.username).first()
+        if User.test_passwords(current_user.password, form.old_pwd.data):
+            if form.new_pwd.data == form.confirm_pwd.data:
+                user.set_password(form.new_pwd.data)
+                db.session.commit()
+                return redirect('/blog')
+            else:
+                flash("The new password does not match the confirmation")
+        else:
+            flash("The 'old' password is incorrect")
+    return render_template('change_password.html',
+                            title='Change your password',
+                            form=form)
+
+
+@app.route('/write', methods=['GET', 'POST'])
+@login_required
+def write():
+    form = WriterForm()
+    if form.validate_on_submit():
+        post = Post(title=form.title.data,
+                    intro=form.intro.data,
+                    content=form.content.data)
+        db.session.add(post)
+        db.session.commit()
+        return redirect('/blog')
+    return render_template('writer.html',
+                           form=form,
+                           form_style='width: 100%;'
+                                      'background-color: whitesmoke;'
+                                      'border: 5px solid darkgrey')
+
+# ----------------------------------------------------------------------------
+# Session
+# ----------------------------------------------------------------------------
 
 
 @app.route('/login', methods=['GET', 'POST'])
@@ -76,8 +124,7 @@ def login():
 
     if form.validate_on_submit():
         user = User.get_user(form.username.data, form.password.data)
-
-        if user is not None:
+        if user:
             db.session.add(user)
             db.session.commit()
 
@@ -120,3 +167,12 @@ def logout():
 
     logout_user()
     return redirect('/index')
+
+# ----------------------------------------------------------------------------
+# Error handlers
+# ----------------------------------------------------------------------------
+
+
+@app.errorhandler(404)
+def page_not_found(e):
+    return render_template('404.html'), 404

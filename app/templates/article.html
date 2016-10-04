@@ -1,0 +1,19 @@
+{% extends "base.html" %}
+{% block content %}
+
+<article class="article">
+    <h4 class="articleTitle">
+        <span>{{ post.title }}</span>
+    </h4>
+    <small>
+        {{ post.date.day }}/{{ post.date.month }}/{{ post.date.year }}
+    </small>
+    <hr/>
+    <div class="articleIntro">
+        {{ markdown(post.intro) | safe }}
+    </div>
+    <div class="articleContent">
+        {{ markdown(post.content) | safe }}
+    </div>
+</article>
+{% endblock %}

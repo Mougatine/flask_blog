@@ -16,8 +16,9 @@
     {% if current_user.is_authenticated %}
         <header id="adminPannel">
             <ul>
-                <li>{{ current_user.username}}</li>
-                <li><a href="{{ url_for('tools') }}">Tools</a> </li>
+                <li id="greetingAdmin">Hello {{ current_user.username}}!</li>
+                <li><a href="{{ url_for('write') }}">Write a post</a></li>
+                <li><a href="{{ url_for('change_password') }}">Change password</a> </li>
                 <li><a href="{{ url_for('logout') }}">Logout</a></li>
             </ul>
         </header>
@@ -25,6 +26,9 @@
 
     <div id="mySidenav" class="sidenav">
         <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+        <div class="profilePic">
+            <img src="{{ url_for('static', filename='images/douill_a.jpg') }}"/>
+        </div>
         <a href="#">About</a>
         <a href="#">Services</a>
         <a href="#">Clients</a>

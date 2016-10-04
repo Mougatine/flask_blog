@@ -1,0 +1,31 @@
+{% extends "base.html" %}}
+{% block content %}
+{{ pagedown.include_pagedown() }}
+
+<form action="" method="post" name="writer">
+    {{ form.hidden_tag() }}
+    <table class="col-md-12">
+        <tr><td>
+            Title
+        </td></tr>
+        <tr><td>
+            {{ form.title(only_input=True, rows=2, style=form_style) }}
+        </td></tr>
+        <tr><td>
+            Intro
+        </td></tr>
+        <tr><td>
+            {{ form.intro(only_input=True, rows=4, style=form_style) }}
+        </td></tr>
+        <tr><td>
+            Content
+        </td></tr>
+        <tr><td>
+            {{ form.content(only_input=True, rows=10, style=form_style) }}
+        </td></tr>
+        <tr><td>
+            <input type="submit" value="Publish">
+        </td></tr>
+    </table>
+</form>
+{% endblock %}}

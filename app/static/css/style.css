@@ -34,18 +34,32 @@ h1, h2, h3, h4, h5, h6 {
     transition: 0.3s
 }
 
-/* When you mouse over the navigation links, change their color */
 .sidenav a:hover, .offcanvas a:focus{
     color: darkred;
 }
 
-/* Position and style the close button (top right corner) */
 .sidenav .closebtn {
     position: absolute;
     top: 0;
     right: 25px;
     font-size: 36px;
     margin-left: 50px;
+}
+
+.sidenav .profilePic {
+    width: 200px;
+    height: 200px;
+    margin: 8px 25px 8px 25px;
+}
+
+.sidenav .profilePic img {
+    display: block;
+    max-width: 200px;
+    max-height: 200px;
+    width: auto;
+    height: auto;
+    border: 1px solid darkgray;
+    border-radius: 100px;
 }
 
 /* Open button */
@@ -64,13 +78,11 @@ h1, h2, h3, h4, h5, h6 {
     color: darkred;
 }
 
-/* Style page content - use this if you want to push the page content to the right when you open the side navigation */
 #main {
     margin-top: 50px;
     margin-bottom: 50px;
 }
 
-/* On smaller screens, where height is less than 450px, change the style of the sidenav (less padding and a smaller font size) */
 @media screen and (max-height: 450px) {
     .sidenav {padding-top: 15px;}
     .sidenav a {font-size: 18px;}
@@ -81,7 +93,7 @@ h1, h2, h3, h4, h5, h6 {
     width: 100%;
     height: 50px;
     color: white;
-    background-color: darkgray;
+    background-color: darkred;
     position: fixed;
     top: 0;
     left: 0;
@@ -89,32 +101,59 @@ h1, h2, h3, h4, h5, h6 {
 
 #adminPannel ul {
     float: right;
+    margin-right: 15px;
+    margin-top: 7px;
 }
 
-#adminPannel ul li {
+#adminPannel ul li,
+#adminPannel ul li a {
     display: inline;
+    font-size: 25px;
+    padding: 20px 8px 20px 8px;
+    color: whitesmoke;
+    transition: 0.3s;
+}
+
+#adminPannel ul li a:hover,
+#adminPannel ul li a:active,
+#adminPannel ul li a:focus {
+    text-decoration: underline;
+    color: white;
+}
+
+#greetingAdmin {
+    position: fixed;
+    left: 30px;
+    top: -13px;
 }
 
 /* article styling */
 .articleMain {
     border-bottom: 1px solid lightgray;
-    padding: 8px 8px 30px 8px;
+    padding: 8px 8px 30px 0;
+}
+
+.article {
+    border-bottom: 1px solid lightgray;
+    padding: 30px 8px 8px 0;
 }
 
 .articleTitle {
-    padding: 8px 8px 8px 32px;
+    padding: 8px 8px 8px 0;
 }
 
 .articleTitle a {
     transition: 0.3s;
 }
 
-.articleTitle a span {
-    font-size: 25px;
+.articleTitle a span,
+.articleTitle span {
+    font-size: 35px;
     color: darkred;
 }
 
-.articleTitle a small {
+.articleTitle a small,
+.articleTitle small {
     font-size: 15px;
     color: darkgray;
     float: right;
@@ -135,7 +174,11 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 .articleContent {
+    font-size: 20px;
+}
 
+.articleIntro {
+    font-size: 25px;
 }
 
 .olderArrow {

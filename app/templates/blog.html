@@ -3,7 +3,7 @@
     {% for post in posts %}
         <article class="articleMain">
             <h4 class="articleTitle">
-                <a href="www.google.com">
+                <a href="{{ url_for('article', title=post.title) }}">
                     <span>{{ post.title }}</span>
                     <small>
                         {{ post.date.day }}/{{ post.date.month }}/{{ post.date.year }}
